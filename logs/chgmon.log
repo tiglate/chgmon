@@ -2,3 +2,16 @@
 2025-07-22 23:38:45.345 [main] DEBUG l.m.a.chgmon.ChgmonApplicationTests - Running with Spring Boot v3.5.3, Spring v6.2.8
 2025-07-22 23:38:45.346 [main] INFO  l.m.a.chgmon.ChgmonApplicationTests - No active profile set, falling back to 1 default profile: "default"
 2025-07-22 23:38:46.534 [main] INFO  l.m.a.chgmon.ChgmonApplicationTests - Started ChgmonApplicationTests in 1.758 seconds (process running for 4.976)
+2025-07-22 23:53:18.630 [main] INFO  l.m.a.chgmon.ChgmonApplicationTests - Starting ChgmonApplicationTests using Java 17.0.12 with PID 32020 (started by danie in C:\Users\danie\Projects\chgmon)
+2025-07-22 23:53:18.634 [main] DEBUG l.m.a.chgmon.ChgmonApplicationTests - Running with Spring Boot v3.5.3, Spring v6.2.8
+2025-07-22 23:53:18.635 [main] INFO  l.m.a.chgmon.ChgmonApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-07-22 23:53:20.579 [main] INFO  l.m.a.chgmon.ChgmonApplicationTests - Started ChgmonApplicationTests in 3.312 seconds (process running for 10.765)
+2025-07-22 23:53:20.986 [main] INFO  l.m.aciem.chgmon.task.MonitorTask - Table: test_table. Deleted row: 1
+2025-07-22 23:53:21.063 [main] DEBUG l.m.aciem.chgmon.task.MonitorTask - Executing monitor task for table: test_table
+2025-07-22 23:53:21.071 [main] DEBUG l.m.aciem.chgmon.task.MonitorTask - Table: test_table. Already deleted row: 1
+2025-07-22 23:53:21.081 [main] INFO  l.m.aciem.chgmon.task.MonitorTask - Table: test_table. Updated row: 1
+2025-07-22 23:53:21.095 [main] DEBUG l.m.aciem.chgmon.task.MonitorTask - Table: test_table. No changes for row: 1
+2025-07-22 23:53:21.109 [main] INFO  l.m.aciem.chgmon.task.MonitorTask - Table: test_table. Inserted row: 1
+2025-07-22 23:53:21.110 [main] INFO  l.m.aciem.chgmon.task.MonitorTask - Table: test_table. Updated row: 2
+2025-07-22 23:53:21.111 [main] DEBUG l.m.aciem.chgmon.task.MonitorTask - Table: test_table. No changes for row: 3
+2025-07-22 23:53:21.122 [main] INFO  l.m.aciem.chgmon.task.MonitorTask - Table: test_table. Inserted row: 1
