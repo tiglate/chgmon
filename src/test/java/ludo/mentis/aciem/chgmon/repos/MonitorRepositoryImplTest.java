@@ -1,10 +1,13 @@
 package ludo.mentis.aciem.chgmon.repos;
 
+import ludo.mentis.aciem.chgmon.model.TableChecksum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 class MonitorRepositoryImplTest {
@@ -110,5 +113,66 @@ class MonitorRepositoryImplTest {
         });
         assertEquals("Primary key name cannot be null or empty", exception.getMessage());
         verify(jdbcTemplate, never()).queryForList(anyString());
+    }
+
+    @Test
+    void findDeletedRows_RecordExists_ReturnsTableChecksum() {
+        // Arrange
+        String tableName = "test_table";
+        String primaryKeyName = "id";
+        
+        // Create expected TableChecksum
+        TableChecksum expectedTableChecksum = new TableChecksum();
+        expectedTableChecksum.setId(1);
+        expectedTableChecksum.setTableName(tableName);
+        expectedTableChecksum.setPrimaryKey(123L);
+        expectedTableChecksum.setCrc32(456L);
+        
+        // Mock the queryForObject method to return the expected TableChecksum
+        when(jdbcTemplate.queryForObject(
+                anyString(),
+                any(RowMapper.class)
+        )).thenReturn(expectedTableChecksum);
+        
+        // Act
+        TableChecksum result = monitorRepository.findDeletedRows(tableName, primaryKeyName);
+        
+        // Assert
+        assertNotNull(result);
+        assertEquals(expectedTableChecksum.getId(), result.getId());
+        assertEquals(expectedTableChecksum.getTableName(), result.getTableName());
+        assertEquals(expectedTableChecksum.getPrimaryKey(), result.getPrimaryKey());
+        assertEquals(expectedTableChecksum.getCrc32(), result.getCrc32());
+        
+        // Verify the SQL query format
+        verify(jdbcTemplate).queryForObject(
+                contains("SELECT * FROM tb_table_checksum WHERE table_name = '" + tableName + "' AND primary_key NOT IN (SELECT " + primaryKeyName + " FROM " + tableName + ")"),
+                any(RowMapper.class)
+        );
+    }
+    
+    @Test
+    void findDeletedRows_NoRecordFound_ReturnsNull() {
+        // Arrange
+        String tableName = "test_table";
+        String primaryKeyName = "id";
+        
+        // Mock the queryForObject method to throw EmptyResultDataAccessException
+        when(jdbcTemplate.queryForObject(
+                anyString(),
+                any(RowMapper.class)
+        )).thenThrow(new EmptyResultDataAccessException(1));
+        
+        // Act
+        TableChecksum result = monitorRepository.findDeletedRows(tableName, primaryKeyName);
+        
+        // Assert
+        assertNull(result);
+        
+        // Verify the SQL query format
+        verify(jdbcTemplate).queryForObject(
+                contains("SELECT * FROM tb_table_checksum WHERE table_name = '" + tableName + "' AND primary_key NOT IN (SELECT " + primaryKeyName + " FROM " + tableName + ")"),
+                any(RowMapper.class)
+        );
     }
 }

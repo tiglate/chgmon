@@ -1,0 +1,4 @@
+2025-07-22 23:38:45.344 [main] INFO  l.m.a.chgmon.ChgmonApplicationTests - Starting ChgmonApplicationTests using Java 17.0.12 with PID 30756 (started by danie in C:\Users\danie\Projects\chgmon)
+2025-07-22 23:38:45.345 [main] DEBUG l.m.a.chgmon.ChgmonApplicationTests - Running with Spring Boot v3.5.3, Spring v6.2.8
+2025-07-22 23:38:45.346 [main] INFO  l.m.a.chgmon.ChgmonApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-07-22 23:38:46.534 [main] INFO  l.m.a.chgmon.ChgmonApplicationTests - Started ChgmonApplicationTests in 1.758 seconds (process running for 4.976)
