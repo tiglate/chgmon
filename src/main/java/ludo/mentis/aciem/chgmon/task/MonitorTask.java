@@ -44,6 +44,7 @@ public class MonitorTask {
         logger.debug("Executing monitor task for table: {}", tableName);
         processDeletedRows();
         processNewAndUpdatedRows();
+        System.gc();
     }
 
     protected void processDeletedRows() {
